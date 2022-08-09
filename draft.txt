@@ -1,5 +1,29 @@
 ### Containers 101 - From Scratch ###
 
+# Host's system info
+# mount | grep cgroup
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,seclabel,nsdelegate,memory_recursiveprot)
+# uname -a
+Linux fedora.example.local 5.18.13-200.fc36.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Jul 22 14:03:36 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux
+# cat /etc/system-release
+Fedora release 36 (Thirty Six)
+# nproc 
+2
+# free -ht | awk '{print $1,$2}' | tail -3
+Mem: 3,8Gi
+Swap: 4,8Gi
+Total: 8,6Gi
+# lsblk
+NAME           MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sr0             11:0    1 1024M  0 rom  
+zram0          251:0    0  3,8G  0 disk [SWAP]
+vda            252:0    0   30G  0 disk 
+├─vda1         252:1    0    1G  0 part /boot
+└─vda2         252:2    0   29G  0 part 
+  ├─VG_01-root 253:0    0   28G  0 lvm  /container
+  │                                     /
+  └─VG_01-swap 253:1    0 1020M  0 lvm  [SWAP]
+
 # Create a custom rootdir
 sudo dnf --releasever=36 --best --setopt=install_weak_deps=False --installroot=/root/myrootdir/ install alternatives apr apr-util apr-util-bdb apr-util-openssl audit-libs authselect authselect-libs basesystem bash bzip2-libs ca-certificates coreutils coreutils-common cracklib crypto-policies cryptsetup-libs curl cyrus-sasl-lib dbus dbus-broker dbus-common dbus-libs device-mapper device-mapper-libs diffutils dnf dnf-data elfutils-default-yama-scope elfutils-libelf elfutils-libs expat fedora-gpg-keys-36-1 fedora-logos-httpd fedora-release fedora-release-common-36-18 fedora-release-container-36-18 fedora-release-identity-container-36-18 fedora-repos-36-1 fedora-repos-modular-36-1 file-libs filesystem findutils fonts-filesystem gawk gdbm-libs glib2 glibc glibc-common glibc-minimal-langpack gmp gnupg2 gnutls gpgme gpm-libs grep gzip hostname httpd httpd-core httpd-filesystem httpd-tools ima-evm-utils info iproute iptables-legacy iptables-legacy-libs iptables-libs iputils json-c julietaula-montserrat-fonts keyutils-libs kmod-libs krb5-libs less libacl libarchive libargon2 libassuan libattr libblkid libbpf libbrotli libcap libcap-ng libcom_err libcomps libcurl libdb libdnf libeconf libevent libfdisk libffi libfsverity libgcc libgcrypt libgomp libgpg-error libibverbs libidn2 libksba libmetalink libmnl libmodulemd libmount libnetfilter_conntrack libnfnetlink libnghttp2 libnl3 libnsl2 libpcap libpsl libpwquality librepo libreport-filesystem libseccomp libselinux libsemanage libsepol libsigsegv libsmartcols libsodium libsolv libssh libssh-config libstdc++ libtasn1 libtirpc libunistring libuuid libverto libxcrypt libxkbcommon libxml2 libyaml libzstd lua-libs lz4-libs mailcap mod_http2 mod_lua mpdecimal mpfr ncurses ncurses-base ncurses-libs net-tools nettle npth openldap openldap-compat openssl-libs p11-kit p11-kit-trust pam pam-libs pcre pcre2 pcre2-syntax popt procps-ng psmisc publicsuffix-list-dafsa python-pip-wheel python-setuptools-wheel python3 python3-dnf python3-gpg python3-hawkey python3-libcomps python3-libdnf python3-libs python3-rpm qrencode-libs readline rootfiles rpm rpm-build-libs rpm-libs rpm-plugin-systemd-inhibit rpm-sign-libs sed setup shadow-utils sqlite-libs strace stress sudo systemd systemd-libs systemd-networkd systemd-pam systemd-resolved tar tpm2-tss tzdata util-linux-core vim-common vim-data vim-enhanced vim-filesystem vim-minimal wget which xkeyboard-config xz-libs yum zchunk-libs zlib dhcp-client glibc-langpack-en passwd -y
 
