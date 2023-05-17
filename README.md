@@ -139,6 +139,8 @@ An overview on how to create containers from scratch using only the operating sy
     
     # ip link set br0 up
     
+    # ip a add dev br0 10.0.0.1/24
+    
     # echo 1 > /proc/sys/net/ipv4/ip_forward
     
     # ln -s /proc/$(lsns | grep unshare | grep net | awk '{print $4}')/ns/net /var/run/netns/container
