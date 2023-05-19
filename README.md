@@ -47,6 +47,8 @@ An overview on how to create containers from scratch using only the operating sy
     # id   
       uid=0(root) gid=0(root) groups=0(root) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
 
+> Note: My base system was updated to Fedora 38 since then, but the same steps below apply from Fedora 36 to Fedora 38 at least.
+
 ## Create a custom rootdir
 
 ### Fedora 36:
@@ -174,6 +176,8 @@ An overview on how to create containers from scratch using only the operating sy
     # iptables -t nat -A POSTROUTING -o enp1s0 -s 10.0.0.0/24 -j MASQUERADE
     
     # iptables -t nat -A PREROUTING -p tcp --dport 8081 -j DNAT --to-destination 10.0.0.2:8081
+
+> Note: You can also use the provided script `setcontainer.sh` to facilite the mounting of the overlayfs filesystem and creating/recreating the container with the steps aforementioned.
 
 ## Inside the container, mount the needed filesystems and run httpd
 
